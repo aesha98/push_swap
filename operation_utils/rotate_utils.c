@@ -1,19 +1,18 @@
 #include "../push_swap.h"
 
 /*ra/rb/rr -- shift up->last element become first*/
-void rotate_stack(struct Stack** node)
+void rotate_stack(stack *stack_a)
 {
-    struct Stack *first;
-    struct Stack *last;
+    node *first;
+    node *last;
 
-    if (stack_size(*node) <= 1)
+    if (stack_a->count <= 1)
         return ;
-    last = *node;
+    last = stack_a->first;
     while (last->next)
         last = last->next;
-    first = *node;
-
-    *node = (*node)->next;
+    first = stack_a->first;
+    stack_a->first = stack_a->first->next;
     first->next = NULL;
     last->next = first;
 }

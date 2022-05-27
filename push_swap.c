@@ -1,93 +1,53 @@
 #include "push_swap.h"
 
+/*
+** Handle sorting condition
+*/
+void  push_swap(stack *stack_a, stack *stack_b)
+{
+  if (stack_a->count > 3)
+    find_max(stack_a);
+  if (stack_a->count == 1)
+    return ;
+  else if (stack_a->count == 2)
+    sort_two(stack_a);
+  else if (stack_a->count == 3)
+    three_random_sort(stack_a);
+  else
+    insertion_sort(stack_a, stack_b);
+}
+
+/*
+** The main program
+*/
 int main(int argc, char *argv[])
 {
-  int num[6] = {3, 4, 2, 5, 1}; //list of integer
-  struct Stack* stack_a;
-  struct Stack* stack_b;
-  char* number;
-  stack_a = NULL;
-  int i;
-  int counter;
-  i = -1;
+  stack *stack_a;
+  stack *stack_b;
+  program mem;
 
-  //t_program.number = (int *)malloc(sizeof(int) * i);
+  mem.is_memory = 0;
 
-/*----------------DEBUG ONLY -------------------*/
-  if (argc >= 2)
+  if (!arrange(&argc, &argv, &mem)) //0
+    write(1, "Error\n", 6);
+  if (argc == 0)
+    write(1, "Error\n", 6);
+  if (!(check_arg(argc, argv))) // 0
+    write(1, "Error\n", 6);
+  if (!(stack_a = fill_stack(argc, argv)))//0
+    write(1, "Error\n", 6);
+  mem.stack_a = stack_a;
+  if (!(stack_b = init_empty_stack()))//1
+    free_stack(mem.stack_a);
+  mem.stack_b = stack_b;
+  if (!check_double(stack_a))//2
   {
-    printf("Number of arguement: %d\n", argc);
-    counter = 0;
-    while (counter++ < argc - 1)
-    {
-      printf("\nargv[%d]: %s", counter, argv[counter]);
-    
-    }
-    
+    free_stack(mem.stack_b);
+    write(1, "Error\n", 6);
   }
-  /*-------------------------------------*/
-
-
-  /*TODO: fetch argv[1] as list of integer
-    if check_arguement:
-     -sorted
-     -duplicate value
-     -bigger than int max
-     -non-int data type
-      return ERROR
-    else
-      initialise stacking
-    */
-     
-  /*TODO: push int from list to stack - unsorted*/
-  printf("\nInitialise Stack A:\n"); 
-  while (num[i] > 0)
-  {
-    push(&stack_a, num[i++]);
-  }
-
-  stack_b = NULL;
-  printf("\nStack A:\n");
-  display_stack(stack_a);
-
-  // printf("\nStack B:\n");
-  // push_b(&stack_a, &stack_b);
-  // push_b(&stack_a, &stack_b);
-  // push_b(&stack_a, &stack_b);
-  // //printf("Pop %d from stack\n", pop(&stack_a, free));
-  
-  // display_stack(stack_b->next->next);
-
-  // printf("\nStack Temp:\n");
-  // push_b(&stack_b, &temp);
-  // push_b(&stack_b, &temp);
-  // push_b(&stack_b, &temp);
-
-  // printf("\nElement in Temp:\n");
-  // display_stack(temp);
-  // display_stack(temp->next);
-  // display_stack(temp->next->next);
-
-  //  printf("\nPush to stack A:\n");
-  // push_a(&temp, &stack_a);
-  // push_a(&temp, &stack_a);
-  // push_a(&temp, &stack_a);
-
-  // printf("\nElement in A:\n");
-  // display_stack(stack_a);
-  // display_stack(stack_a->next);
-  // display_stack(stack_a->next->next);
-
-   printf("\nSort..\n");
-   five_random_number(&stack_a, &stack_b);
-   printf("\nStack A new order:\n");
-   display_stack(stack_a);
-  //swap_element(stack_a);
-  //printf("swap element\n");
-  //swap_a(stack_a);
-  //display_stack(stack_a->next->next);
-  //push_a(&stack_b, &stack_a);
-  //display_stack(stack_a);
-  return 0;
+  if (is_sorted(stack_a, stack_b))//3
+    return (EXIT_SUCCESS); 
+  push_swap(stack_a, stack_b);
+  return (EXIT_SUCCESS);
 }
 

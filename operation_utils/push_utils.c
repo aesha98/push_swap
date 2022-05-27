@@ -1,17 +1,29 @@
 #include "../push_swap.h"
 
+/*insert node into stack*/
+int push(stack *a, stack *b)
+{
+    if (b->count == 0)
+        return (1);
+    else if (!add_node(a, remove_node(b)))
+        return (0);
+    return (1);
+}
+
 /*pa - push top element 
 * stack b to stack a*/
-void push_a(struct Stack** b, struct Stack** a)
+void push_a(stack *b, stack *a)
 {
-    push(a, pop(b, free));
+    if (!push(a, b))
+        return ;
     printf("pa\n");
 }
 
 /*pb - push top element
 * stack a to stack b*/
-void push_b(struct Stack** a, struct Stack** b)
+void push_b(stack *a, stack *b)
 {
-    push(b, pop(a, free));
+    if (!push(b, a))
+        return ;
     printf("pb\n");
 }

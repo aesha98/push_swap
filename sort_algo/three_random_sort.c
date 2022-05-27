@@ -3,50 +3,45 @@
 /*Sort element in stack with three input size
    note: do not run this function if 
    list is sorted*/
-void three_random_sort(struct Stack** top)
+void three_random_sort(stack *stack_a)
 {
-    struct Stack *middle;
-    struct Stack *bottom;
+    int first;
+    int second;
+    int third;
 
-    middle = *top;
-    bottom = *top;
-
-    while (bottom->next)
-        bottom = bottom->next;
-    middle = middle->next;
-
-        /*CASE 1 : 2 1 3*/
-    if (((*top)->element > middle->element) && (middle->element < bottom->element) && (bottom->element > (*top)->element))
+    first = stack_a->first->element;
+    second = stack_a->first->next->element;
+    third = stack_a->first->next->next->element;
+    if (first > second && second > third && first > third)
     {
-        swap_element(*top);
-        printf("sa\n");
-
-    }  /*CASE 2:  */
-    else if (((*top)->element > middle->element) && (middle->element > bottom->element) && (bottom->element < (*top)->element))
-    {
-        swap_element(*top);
-        printf("sa\n");
-        reverse_rotate(top);
-        printf("rra\n");
-    }  /*CASE 3 : */
-    else if (((*top)->element > middle->element) && (middle->element < bottom->element) && (bottom->element < (*top)->element))
-    {
-        rotate_stack(top);
-        printf("ra\n");
+        sa(stack_a);
+        rra(stack_a);
     }
-    else if (((*top)->element < middle->element) && (middle->element > bottom->element) && (bottom->element > (*top)->element))
+    else if (first < second && second > third && first < third)
     {
-        swap_element(*top);
-        printf("sa\n");
-        rotate_stack(top);
-        printf("ra\n");
+        rra(stack_a);
+        sa(stack_a);
     }
-    /*middle > bottom 1 3 2 --> 1 2 3 OK */
-    else if (((*top)->element < middle->element) && (middle->element > bottom->element) && (bottom->element < (*top)->element))
+    else if (first > second && second < third && first < third)
     {
-        reverse_rotate(top);
-        printf("ra\n");
+		sa(stack_a);
     }
-    free(middle);
-    free(bottom);
+	else if (first < second && second > third && first > third)
+    {
+		rra(stack_a);
+    }
+	else if (first > second && second < third && first > third)
+    {
+		ra(stack_a);
+    }
+ 
+}
+
+void sort_two(stack *stack_a)
+{
+    if (stack_a->first->element > stack_a->first->next->element)
+    {
+        sa(stack_a);
+    }
+    return ;
 }

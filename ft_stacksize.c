@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int ft_stacksize(struct Stack *lst)
+int ft_stacksize(struct stack *lst)
 {
     int i;
 
@@ -11,4 +11,15 @@ int ft_stacksize(struct Stack *lst)
         lst = lst->next;
     }
     return (i);
+}
+size_t ft_strlen(const char *str)
+{
+    size_t counter;
+
+    counter = 0;
+    while (*str++ != '\0')
+    {
+        counter++;
+    }
+    return (counter);
 }

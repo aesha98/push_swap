@@ -10,14 +10,14 @@ void swap(int* a, int* b)
 
 /*sa or sb- swap top element 
 * stack a or stack b*/
-void swap_element(struct Stack* topp)
+void swap_element(stack *top)
 {
-    struct Stack* temp;
+    node *first;
 
-    if (stack_size(topp) < 1)
+    if (top->count < 1)
         return ;
-    temp = topp;
-    swap(&temp->element, &temp->next->element);
+    first = top->first;
+    swap(&first->element, &first->next->element);
 }
 
 /*ss - swap both a & b */

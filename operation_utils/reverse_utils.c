@@ -1,16 +1,16 @@
 #include "../push_swap.h"
 
 /*shift DOWN all element by 1- the last node is first*/
-void reverse_rotate(struct Stack** node)
+void reverse_rotate(stack *stack_a)
 {
-    struct Stack *last;
-    struct Stack *new_last;
+    node *last;
+    node *new_last;
     
     /*TODO : ERROR CHECKING FOR STACKSIZE*/
-    if (stack_size(*node) <= 1)
+    if (stack_a->count <= 1)
         return ;
     
-    last = *node; /*set last pointer point to first node*/
+    last = stack_a->first; /*set last pointer point to first node*/
     while (last->next)
     {
         if (!last->next->next)
@@ -19,6 +19,6 @@ void reverse_rotate(struct Stack** node)
     }
     new_last->next = NULL;
 
-    last->next = *node;
-    *node = last;
+    last->next = stack_a->first;
+    stack_a->first = last;
 }

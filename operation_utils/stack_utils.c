@@ -1,56 +1,62 @@
 #include "../push_swap.h"
 
- /*initialize stack to NULL*/
- /*initialised list to NULL(0)-empty stack */
-void init_stack(struct Stack** top)
-{
-   *top = NULL;
-}
 
-/*insert node into stack*/
-void push(struct Stack** top, int element)
-{
-    struct Stack *node = newNode(element); /*create node*/
-    node->next = *top;  /*assign node at top stack*/
-    *top = node;        /*put data into first node */
-}
-
-/*remove first node from stack*/
-int pop(struct Stack** top, void(*del)(void*))
-{
-    int element_pop;
-    if (!top)
-        exit(0);
-    struct Stack* temp = *top;  /*initialise ptr to top node*/
-    *top = (*top)->next;        /*assign top pointer to next node*/
-    element_pop = temp->element; /*point temp_node to the element */
-    (*del)(temp);                /*pop or free node from stack*/
-    return (element_pop);
-}
-
-/* count total node in stack*/
-int stack_size(struct Stack* stack)
+/* fill the initialize stack with data- unsorted*/
+stack *fill_stack(int argc, char **argv)
 {
     int i;
+    int nb;
+    stack *stack_s;
 
-    i = 0;
-    while (stack)
+    i = argc;
+    stack_s = init_empty_stack();
+    if (!stack_s)
     {
-        i++;
-        stack = stack->next;
+        return (NULL);
     }
-    return (i);
+    while (--i >= 0)
+    {
+        nb = ft_atoi(argv[i]);
+        if (!add_node(stack_s, nb))
+        {
+            free_stack(stack_s);
+            return (NULL);
+        }
+    }
+    return (stack_s);
 }
 
-void display_stack(struct Stack* top)
+/*initialize the empty stack*/
+stack *init_empty_stack(void)
 {
-    if(!top)
-        exit(0);
-    while (top->next)
+    stack *stack_s;
+
+    stack_s = (stack *)malloc(sizeof(stack));
+    if (!stack_s)
+        return (NULL);
+    stack_s->first = NULL;
+    stack_s->count = 0;
+    stack_s->min = 2147483647;
+    stack_s->max = -2147483648;
+    return (stack_s);   
+}
+
+/*
+** Print out all the element in the stack.
+*/
+void display_stack(stack *stack_s)
+{
+    node *element;
+
+    if(!stack_s)
+        return ;
+    element = stack_s->first;
+    while (element)
     {
-        printf("%d\n", top->element);
-        top = top->next;
+        printf("%d\n", element->element);
+        element = element->next;
     }
+    printf("\n");
 }
 
 
