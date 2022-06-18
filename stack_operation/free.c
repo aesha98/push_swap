@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sitbinti <sitbinti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 20:03:33 by sitbinti          #+#    #+#             */
-/*   Updated: 2022/06/16 20:15:20 by sitbinti         ###   ########.fr       */
+/*   Created: 2022/06/17 18:39:15 by sitbinti          #+#    #+#             */
+/*   Updated: 2022/06/17 18:39:17 by sitbinti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#include "../include/push_swap.h"
 
-/** The main program*/
-int main(int argc, char *argv[])
+void free_arg(char **argv)
 {
-  program stack;
+    int i;
 
-  if (argc < 2) 
-    return (0);
-  stack.a = format_create_stack(argc, argv);
-  stack.b = NULL;
-  sort_stack(&stack);
-  clear_stack(&stack.a);
-  clear_stack(&stack.b);
-  return (0);
+    i = -1;
+    while (argv[++i])
+    {
+        free(argv[i]);
+    }
+    free(argv);
+}
+
+void    free_stack(stack **s)
+{
+    stack   *ref;
+
+    while(*s)
+    {
+        ref = (*s)->next;
+        free(s);
+        *s = ref;
+    }
+    *s = 0;
 }

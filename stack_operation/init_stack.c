@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sitbinti <sitbinti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 20:03:33 by sitbinti          #+#    #+#             */
-/*   Updated: 2022/06/16 20:15:20 by sitbinti         ###   ########.fr       */
+/*   Created: 2022/06/16 20:38:15 by sitbinti          #+#    #+#             */
+/*   Updated: 2022/06/16 20:43:39 by sitbinti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#include "../include/push_swap.h"
 
-/** The main program*/
-int main(int argc, char *argv[])
+stack *init_stack(int data)
 {
-  program stack;
+    stack *ref;
 
-  if (argc < 2) 
-    return (0);
-  stack.a = format_create_stack(argc, argv);
-  stack.b = NULL;
-  sort_stack(&stack);
-  clear_stack(&stack.a);
-  clear_stack(&stack.b);
-  return (0);
+    ref = malloc(sizeof(stack));
+    if (ref == NULL) 
+        return (0);
+    ref->next = 0;
+    ref->prev = 0;
+    ref->element = data;
+    return (ref);
 }

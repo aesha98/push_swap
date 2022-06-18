@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sitbinti <sitbinti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 20:03:33 by sitbinti          #+#    #+#             */
-/*   Updated: 2022/06/16 20:15:20 by sitbinti         ###   ########.fr       */
+/*   Created: 2022/06/16 17:27:26 by sitbinti          #+#    #+#             */
+/*   Updated: 2022/06/17 18:36:01 by sitbinti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/push_swap.h"
+#ifndef PUSH_SWAP
+# define PUSH_SWAP
 
-/** The main program*/
-int main(int argc, char *argv[])
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
+# define OP 1
+
+#include "../libft/libft.h"
+
+typedef struct s_stack
 {
-  program stack;
+    int element;
+    struct s_stack *next;
+    struct s_stack *prev;
+} stack;
 
-  if (argc < 2) 
-    return (0);
-  stack.a = format_create_stack(argc, argv);
-  stack.b = NULL;
-  sort_stack(&stack);
-  clear_stack(&stack.a);
-  clear_stack(&stack.b);
-  return (0);
-}
+typedef struct t_program
+{
+    stack *a;
+    stack *b;
+    int counter;
+} program;
+
+stack *init_stack(int data);
+
+void free_arg(char **argv);
+#endif
