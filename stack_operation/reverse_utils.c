@@ -10,28 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "../include/push_swap.h"
 
 /*shift DOWN all element by 1- the last node is first*/
-void reverse_rotate(stack *stack_a)
+void reverse_rotate(stack **stack_s)
 {
-    node *last;
-    node *new_last;
+    stack *last;
     
     /*TODO : ERROR CHECKING FOR STACKSIZE*/
-    if (stack_a->count <= 1)
+    if (*stack_s == NULL || (*stack_s)->next == NULL)
         return ;
-    
-    last = stack_a->first; /*set last pointer point to first node*/
-    while (last->next)
-    {
-        if (!last->next->next)
-            new_last = last;
-        last = last->next;
-    }
-    new_last->next = NULL;
-
-    last->next = stack_a->first;
+    last = bottom_stack(*stack_s);
+    (*stack_s)->prev = last;
+    last->prev->next = NULL;
     last->prev = NULL;
-    stack_a->first = last;
+    last->next = (*stack_s);
+    *stack_s = last;
 }

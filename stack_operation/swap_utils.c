@@ -1,28 +1,14 @@
-#include "../push_swap.h"
-
-void swap(int* a, int* b)
-{
-    int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
-}
+#include "../include/push_swap.h"
 
 /*sa or sb- swap top element 
 * stack a or stack b*/
-void swap_element(stack *top)
+void swap_element(stack *stack_s)
 {
-    node *first;
+   int element;
 
-    if (top->count < 1)
+   if (stack_s == NULL || stack_s->next == NULL)
         return ;
-    first = top->first;
-    swap(&first->element, &first->next->element);
-}
-
-/*ss - swap both a & b */
-void swap_both(struct Stack *b, struct Stack *a)
-{
-    swap_element(a);
-    swap_element(b);
+   element = stack_s->element;
+   stack_s->element = stack_s->next->element;
+   stack_s->next->element = element;
 }

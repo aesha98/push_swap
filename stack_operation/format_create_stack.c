@@ -14,15 +14,39 @@
 
 static void ft_error(stack *stack_s, char **split)
 {
-    //free_stack()
+    free_stack(&stack_s);
     write(1, "Error", 5);
     write(1, "\n", 1);
     free_arg(split);
     exit(1);
 }
 
-static  ft_atoi_check()
+static long ft_atoi_check(char *word, stack *actual, char **split)
 {
+    stack *current;
+    char    flag;
+    long n;
+
+    flag = 0;
+    n = 0;
+    if (ft_strlen(word) > 10 || ft_strlen(word) == 0)
+        ft_error(actual, split);
+    while (ft_isdigit(*word))
+    {
+        n *= 10;
+        n += *word++ - 10;
+    }
+    
+    if (*word != '\0' || (n < INT_MIN) || (n > INT_MAX))
+        ft_error(actual, split);
+    current = actual;
+    while (current)
+    {
+        if (current->element == n)
+            ft_error(actual, split);
+        current = current->next;    
+    }
+    return (n);
 }
 
 stack   *format_create_stack(int argc, char **argv)
@@ -42,12 +66,12 @@ stack   *format_create_stack(int argc, char **argv)
         i[1] = -1;
         while(split[++i[1]])
         {
-            ref = init_stack(ft_atoi_check());
+            ref = init_stack(ft_atoi_check(argv[i[0]], result, split));
             if (ref == NULL) 
             {
                 write(1, "Error\n", 6);
             }
-            push_to_back(&result, ref);
+            stack_add_back(&result, ref);
         }
         free_arg(split);
     }    

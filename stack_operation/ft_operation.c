@@ -1,35 +1,21 @@
-#include "push_swap.h"
+#include "../include/push_swap.h"
 
-/* swap stack a */
-void sa(stack *stack_a)
+void    ft_operation(char *op, program *stack)
 {
-    swap_element(stack_a);
-    write(1, "sa\n", 3);
-}
-
-/*rotate stack a*/
-void  ra(stack *stack_a)
-{
-    rotate_stack(stack_a);
-    write(1, "ra\n", 3);
-}
-/*reverse rotate stack a*/
-void  rra(stack *stack_a)
-{
-    reverse_rotate(stack_a);
-    write(1, "rra\n", 4);
-}
-
-/*rotate stack b*/
-void  rb(stack *stack_b)
-{
-    rotate_stack(stack_b);
-    write(1, "rb\n", 3);
-}
-
-/*reverse rotate stack b*/
-void  rrb(stack *stack_b)
-{
-    reverse_rotate(stack_b);
-    write(1, "rrb\n", 4);
+    if (!ft_strncmp(op, "ra", 3) || !ft_strncmp(op, "rr", 3))
+     rotate_stack(&stack->a);
+    if (!fn_strncmp(op, "rb", 3) || !ft_strncmp(op, "rr", 3))
+        rotate_stack(&stack->b);
+    if (!fn_strncmp(op, "rra", 4) ||!ft_strncmp(op, "rrr", 3))
+        reverse_rotate(&stack->a);
+    if (!fn_strncmp(op, "rrb", 4) ||!ft_strncmp(op, "rrr", 3))
+        reverse_rotate(&stack->b);
+    if (!fn_strncmp(op, "pa"))
+        push(stack->a, stack->b);
+    if (!ft_strncmp(op, "pb", 3))
+        push(stack->b, stack->a);
+    if (!ft_strncmp(op, "sa", 3))
+        swap_element(stack->a);
+    if (!ft_strncmp(op, "sb", 3))
+        swap_element(stack->b);   
 }

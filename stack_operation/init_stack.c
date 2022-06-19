@@ -14,13 +14,13 @@
 
 stack *init_stack(int data)
 {
-    stack *ref;
+    stack *head;
 
-    ref = malloc(sizeof(stack));
-    if (ref == NULL) 
+    head = malloc(sizeof(stack));
+    if (head == NULL) 
         return (0);
-    ref->next = 0;
-    ref->prev = 0;
-    ref->element = data;
-    return (ref);
+    head->next = 0;
+    head->prev = 0;
+    head->element = data;
+    return (head);
 }
