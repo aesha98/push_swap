@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
   stack.a = format_create_stack(argc, argv);
   stack.b = NULL;
   sort_stack(&stack);
-  clear_stack(&stack.a);
-  clear_stack(&stack.b);
+  free_stack(&stack.a);
+  free_stack(&stack.b);
   return (0);
 }
