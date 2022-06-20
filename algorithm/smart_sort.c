@@ -29,7 +29,17 @@ int check_sort_num(stack *stack_s, int status, int num)
 
 void    get_stack(program *stack, int ra_counter, int rb_counter)
 {
-
+    while (ra_counter > 0 || rb_counter > 0)
+    {
+        if (ra_counter > 0 && rb_counter > 0)
+            ft_operation("rrr", stack);
+        else if (ra_counter > 0)
+            ft_operation("rra", stack);
+        else if (rb_counter > 0)
+            ft_operation("rrb", stack);
+        --ra_counter;
+        --rb_counter;
+    }   
 }
 
 void    sort_stack(program *stack_s)

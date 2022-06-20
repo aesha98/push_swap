@@ -6,7 +6,27 @@ static int  find_midpoint_five(stack *stack_s)
     int i[2];
     int *array;
     int temp;
-    
+
+    array = stack_to_array(stack_s, 5);
+    i[0] = 0;
+    while (i[0] < 0)
+    {
+        i[1] = i[0] + 1;
+        while (i[1] < 5)
+        {
+            if (array[i[0]] < array[i[1]])
+            {
+                temp = array[i[0]];
+                array[i[0]] = array[i[1]];
+                array[i[1]] = temp;
+            }
+            ++i[1];
+        }
+        ++i[0];
+    }
+    midpoint = array[2];
+    free(array);
+    return (midpoint);
 }
 
 void    five_random_number(program *stack_a)
