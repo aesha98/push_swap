@@ -1,4 +1,3 @@
-CHECKER : checker
 NAME: push_swap
 GCC : gcc 
 CFLAGS: -Wall -Wetra -Werror
@@ -26,33 +25,33 @@ PUSH_SWAP_OBJ = $(addprefix(OBJS_DIR)/, $(notdir $(ALGORITHM_SRC:.c =.o)))
 all : $(NAME)
 
 clean : 
-		@$(RM) $(RMFLAGS) $(OBJS_DIR)
+	@$(RM) $(RMFLAGS) $(OBJS_DIR)
 
 fclean : clean
-		@$(RM) $(RMFLAGS) $(NAME)
+	@$(RM) $(RMFLAGS) $(NAME)
 
 re : fclean all
 
 $(OBJS_DIR) :
-		@mkdir $(OBJS_DIR)
+	@mkdir $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o : %.c $(LIBFT_FILE) | $(OBJS_DIR)
-			@$(GCC) $(CFLAGS) -c $< -o $@
+	@$(GCC) $(CFLAGS) -c $< -o $@
 
 $(NAME) :	$(LIBFT_FILE) $(HEADER) $(PUSH_SWAP_OBJ) push_swap.c
-		@$(GCC) $(CFLAGS) $(LIBFT_FLAGS) $(PUSH_SWAP_OBJ) push_swap.c
+	@$(GCC) $(CFLAGS) $(LIBFT_FLAGS) $(PUSH_SWAP_OBJ) push_swap.c -o
 
 #libft compile
 $(LIBFT) : $(LIBFT_FILE)
 
 $(LIBFT_FILE) :
-		@make --no-print-directory -C $(LIBFT_DIR)
+	@make --no-print-directory -C $(LIBFT_DIR)
 
 $(LIBFT)_clean :
-		@make --no-print-directory -C $(LIBFT_DIR) clean
+	@make --no-print-directory -C $(LIBFT_DIR) clean
 
 $(LIBFT)_fclean :
-		@make --no-print-directory -C $(LIBFT_DIR) fclean
+	@make --no-print-directory -C $(LIBFT_DIR) fclean
 
 .PHONY: all clean fclean re test \
-		$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean
+	$(LIBFT) $(LIBFT)_clean $(LIBFT)_fclean
